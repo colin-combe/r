@@ -1,0 +1,54 @@
+---
+title: "self v between decoys"
+author: colin combe
+output: html_notebook
+---
+
+```{r eval=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(ggsci)
+library(reshape2)
+library(plotly)
+library(ggExtra)
+library(egg)
+library(svglite)
+```
+
+
+```{r}
+CLMS_scores <- read.csv("./OCCMscores.csv")
+h<- ggplot(CLMS_scores, aes(Score, fill=Self )) +geom_histogram(binwidth=0.1)
+h
+```
+
+
+```{r}
+h_log<- ggplot(CLMS_scores, aes(log(Score), fill=Self )) +geom_histogram(binwidth=0.1)
+h_log
+```
+
+```{r}
+d_log<- ggplot(CLMS_scores, aes(log(Score), fill=Self)) +geom_density(alpha = 0.4)
+d_log
+```
+
+
+```{r}
+d_log + facet_wrap(~DecoyType, ncol=1)
+```
+
+```{r}
+TD_only <- CLMS_scores[CLMS_scores$DecoyType == 'TD',]
+head(TD_only)
+d_TD =  ggplot(TD_only, aes(log(TD_only.Score), fill=Self)) +geom_density(alpha = 0.4)
+d_TD
+```
+
+```{r}
+d_log + facet_wrap(~DecoyType~SamePep, ncol=1)
+```
+
+
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
