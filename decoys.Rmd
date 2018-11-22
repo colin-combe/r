@@ -49,7 +49,17 @@ d_TD
 
 ```{r}
 head(TD_only)
-ks.test(TD_only[TD_only$Self == "TRUE", ], TD_only[TD_only$Self == "FALSE", ])
+x=
+TD_only[TD_only$Self
+==
+"TRUE",
+ ]
+y=
+TD_only[TD_only$Self
+==
+"FALSE",
+ ]
+ks.test(x$Score, y$Score) 
 ```
 
 
