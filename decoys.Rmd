@@ -38,12 +38,22 @@ d_log
 d_log + facet_wrap(~DecoyType, ncol=1)
 ```
 
+TD only
+
 ```{r}
 TD_only <- CLMS_scores[CLMS_scores$DecoyType == 'TD',]
 head(TD_only)
-d_TD =  ggplot(TD_only, aes(log(TD_only.Score), fill=Self)) +geom_density(alpha = 0.4)
+d_TD <- ggplot(TD_only, aes(log(Score), fill=Self)) +geom_density(alpha = 0.4)
 d_TD
 ```
+
+```{r}
+head(TD_only)
+ks.test(TD_only[TD_only$Self == "TRUE", ], TD_only[TD_only$Self == "FALSE", ])
+```
+
+
+
 
 ```{r}
 d_log + facet_wrap(~DecoyType~SamePep, ncol=1)
