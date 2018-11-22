@@ -38,17 +38,16 @@ d_log
 d_log + facet_wrap(~DecoyType, ncol=1)
 ```
 
-TD only
+all decoys
 
 ```{r}
-TD_only <- CLMS_scores[CLMS_scores$DecoyType == 'TD',]
-head(TD_only)
+TD_only <- CLMS_scores[CLMS_scores$DecoyType != 'TT',]
 d_TD <- ggplot(TD_only, aes(log(Score), fill=Self)) +geom_density(alpha = 0.4)
 d_TD
 ```
 
+
 ```{r}
-head(TD_only)
 x=
 TD_only[TD_only$Self
 ==
@@ -62,13 +61,4 @@ TD_only[TD_only$Self
 ks.test(x$Score, y$Score) 
 ```
 
-
-
-
-```{r}
-d_log + facet_wrap(~DecoyType~SamePep, ncol=1)
-```
-
-
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+K-S test: cannot reject Null Hypothesis (differences are random) if p-value > 0.05
