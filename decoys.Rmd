@@ -5,31 +5,30 @@ output: html_notebook
 ---
 
 ```{r eval=FALSE}
+install.packages(c("ggplot2", "ggthemes", "ggsci", "reshape2", "plotly","ggExtra", "svglite"))
 library(ggplot2)
 library(ggthemes)
 library(ggsci)
 library(reshape2)
 library(plotly)
 library(ggExtra)
-library(egg)
-library(svglite)
 ```
 
 
 ```{r}
-CLMS_scores <- read.csv("./OCCMscores.csv")
-h<- ggplot(CLMS_scores, aes(Score, fill=Self )) +geom_histogram(binwidth=0.1)
+CLMS_scores <- read.csv("./myc12394.csv")
+h<- ggplot(CLMS_scores, aes(Score, fill=LinkType )) +geom_histogram(binwidth=0.1)
 h
 ```
 
 
 ```{r}
-h_log<- ggplot(CLMS_scores, aes(log(Score), fill=Self )) +geom_histogram(binwidth=0.1)
+h_log<- ggplot(CLMS_scores, aes(log(Score), fill=LinkType )) +geom_histogram(binwidth=0.1)
 h_log
 ```
 
 ```{r}
-d_log<- ggplot(CLMS_scores, aes(log(Score), fill=Self)) +geom_density(alpha = 0.4)
+d_log<- ggplot(CLMS_scores, aes(log(Score), fill=LinkType)) +geom_density(alpha = 0.4)
 d_log
 ```
 
@@ -41,9 +40,9 @@ d_log + facet_wrap(~DecoyType, ncol=1)
 all decoys
 
 ```{r}
-TD_only <- CLMS_scores[CLMS_scores$DecoyType != 'TT',]
-d_TD <- ggplot(TD_only, aes(log(Score), fill=Self)) +geom_density(alpha = 0.4)
-d_TD
+decoy_only <- CLMS_scores[CLMS_scores$DecoyType != 'TT',]
+d_decoy <- ggplot(decoy_only, aes(log(Score), fill=LinkType)) +geom_density(alpha = 0.4)
+d_decoy
 ```
 
 
