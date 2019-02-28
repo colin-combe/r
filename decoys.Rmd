@@ -5,18 +5,18 @@ output: html_notebook
 ---
 
 ```{r eval=FALSE}
-install.packages(c("ggplot2", "ggthemes", "ggsci", "reshape2", "plotly","ggExtra", "svglite"))
+install.packages(c("ggplot2")) #, "ggthemes", "ggsci", "reshape2", "plotly","ggExtra", "svglite"))
 library(ggplot2)
-library(ggthemes)
-library(ggsci)
-library(reshape2)
-library(plotly)
-library(ggExtra)
+#library(ggthemes)
+#library(ggsci)
+#library(reshape2)
+#library(plotly)
+#library(ggExtra)
 ```
 
 
 ```{r}
-CLMS_scores <- read.csv("./myc12394.csv")
+CLMS_scores <- read.csv("./ecVal.csv")
 h<- ggplot(CLMS_scores, aes(Score, fill=LinkType )) +geom_histogram(binwidth=0.1)
 h
 ```
@@ -28,7 +28,7 @@ h_log
 ```
 
 ```{r}
-d_log<- ggplot(CLMS_scores, aes(log(Score), fill=LinkType)) +geom_density(alpha = 0.4)
+d_log<- ggplot(CLMS_scores, aes(log(Score), color=LinkType)) +geom_density(alpha = 0.4)
 d_log
 ```
 
@@ -36,6 +36,12 @@ d_log
 ```{r}
 d_log + facet_wrap(~DecoyType, ncol=1)
 ```
+
+
+```{r}
+h_log + facet_wrap(~DecoyType, ncol=1)
+```
+
 
 all decoys
 
@@ -48,12 +54,12 @@ d_decoy
 
 ```{r}
 x=
-TD_only[TD_only$Self
+decoy_only[decoy_only$Self
 ==
 "TRUE",
  ]
 y=
-TD_only[TD_only$Self
+decoy_only[decoy_only$Self
 ==
 "FALSE",
  ]
